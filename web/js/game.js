@@ -269,16 +269,16 @@ function renderStarMap(completedChars) {
             <div class="c-name">${c.name}</div>
             <div class="c-desc">${c.desc}</div>
           </div>
-          ${complete ? '<div class="c-complete-badge">✨</div>' : ''}
+          ${complete
+            ? '<div class="c-complete-badge">✨</div>'
+            : `<div class="c-progress-label">${pct}%</div>`}
         </div>
         <div class="star-field">${stars}</div>
         <div class="c-footer">
           <div class="c-progress-bar">
             <div class="c-progress-fill" style="width:${pct}%"></div>
           </div>
-          <div class="c-count">
-            ${pct > 0 ? `<span style="color:var(--c-color,#FFE66D);font-weight:700">${pct}%</span> · ` : ''}${lit}/${total}
-          </div>
+          <div class="c-count">${lit}/${total}</div>
         </div>
       </div>`;
   }).join('');
