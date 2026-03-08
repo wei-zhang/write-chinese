@@ -459,12 +459,14 @@ html, body {
 #success-screen {
   background: linear-gradient(135deg, #6BCB77 0%, #4ECDC4 100%);
   align-items: center;
-  justify-content: center;
   text-align: center;
-  padding: 24px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 24px 24px calc(env(safe-area-inset-bottom, 16px) + 24px);
 }
 
 .success-content {
+  width: 100%;
   animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -732,7 +734,9 @@ html, body {
   gap: 12px;
   padding: 16px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   flex: 1;
+  min-height: 0;
 }
 
 .char-card {
