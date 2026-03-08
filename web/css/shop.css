@@ -460,39 +460,81 @@
   border: 1px solid rgba(162, 155, 254, 0.4);
 }
 
-/* ── Animated Style Container Classes ─────────── */
+/* ── Animated Style SVG Classes ───────────────── */
+/* Applied to the SVG element (transparent bg) so drop-shadow follows strokes */
 
-@keyframes styleBlaze {
-  0%, 100% { filter: drop-shadow(0 0 6px #FF6B35) drop-shadow(0 0 10px rgba(255,50,0,0.5)); }
-  50%       { filter: drop-shadow(0 0 16px #FF6B35) drop-shadow(0 0 26px rgba(255,120,0,0.85)); }
+/* Neon Sign — buzzing tube flicker: random brightness drops mimic a faulty neon light */
+@keyframes styleNeonSign {
+  0%, 18%, 22%, 25%, 55%, 57%, 100% {
+    filter: drop-shadow(0 0 4px #FF2D78) drop-shadow(0 0 12px #FF2D78) drop-shadow(0 0 24px rgba(255,45,120,0.7));
+  }
+  20%, 24% {
+    filter: drop-shadow(0 0 1px #FF2D78) drop-shadow(0 0 2px rgba(255,45,120,0.2));
+  }
+  56% {
+    filter: drop-shadow(0 0 2px #FF2D78) drop-shadow(0 0 4px rgba(255,45,120,0.3));
+  }
 }
 
-@keyframes styleLightning {
-  0%, 75%, 100% { filter: drop-shadow(0 0 4px #00CFFF) drop-shadow(0 0 8px rgba(0,180,255,0.3)); }
-  80%           { filter: drop-shadow(0 0 22px #FFFFFF) drop-shadow(0 0 30px #00CFFF); }
-  85%           { filter: drop-shadow(0 0 6px #00CFFF) drop-shadow(0 0 10px rgba(0,180,255,0.4)); }
-  90%           { filter: drop-shadow(0 0 18px #FFFFFF) drop-shadow(0 0 24px #00CFFF); }
+/* Plasma — electric arc cycling through purple→cyan with swelling glow */
+@keyframes stylePlasma {
+  0%   { filter: drop-shadow(0 0 6px #BF5FFF) drop-shadow(0 0 16px #7B2FBE); }
+  25%  { filter: drop-shadow(0 0 14px #E040FB) drop-shadow(0 0 28px #BF5FFF); }
+  50%  { filter: drop-shadow(0 0 6px #00E5FF) drop-shadow(0 0 18px #0091EA); }
+  75%  { filter: drop-shadow(0 0 14px #BF5FFF) drop-shadow(0 0 28px #00E5FF); }
+  100% { filter: drop-shadow(0 0 6px #BF5FFF) drop-shadow(0 0 16px #7B2FBE); }
 }
 
-@keyframes stylePulse {
-  0%, 100% { filter: drop-shadow(0 0 4px #00FF94) drop-shadow(0 0 8px rgba(0,255,148,0.3)); }
-  50%       { filter: drop-shadow(0 0 18px #00FF94) drop-shadow(0 0 30px rgba(0,255,148,0.75)); }
+/* Glitch — cyberpunk RGB split: offset shadows jump in opposite directions */
+@keyframes styleGlitch {
+  0%, 88%, 100% {
+    filter: drop-shadow(0 0 5px #00FFCC) drop-shadow(0 0 12px rgba(0,255,204,0.5));
+  }
+  89% {
+    filter: drop-shadow(-3px 0 6px #FF003C) drop-shadow(3px 0 6px #00FFCC) drop-shadow(0 0 18px rgba(0,255,204,0.3));
+  }
+  91% {
+    filter: drop-shadow(0 0 2px #00FFCC);
+  }
+  92% {
+    filter: drop-shadow(3px 0 8px #FF003C) drop-shadow(-3px 0 8px #00FFCC) drop-shadow(0 0 22px #FF003C);
+  }
+  94% {
+    filter: drop-shadow(0 0 5px #00FFCC) drop-shadow(0 0 12px rgba(0,255,204,0.5));
+  }
+  96% {
+    filter: drop-shadow(-2px 1px 4px #FF003C) drop-shadow(2px -1px 4px #00FFCC);
+  }
 }
 
-@keyframes styleRainbow {
-  0%   { filter: drop-shadow(0 0 10px hsl(0,100%,65%)); }
-  17%  { filter: drop-shadow(0 0 10px hsl(60,100%,65%)); }
-  33%  { filter: drop-shadow(0 0 10px hsl(120,100%,65%)); }
-  50%  { filter: drop-shadow(0 0 10px hsl(180,100%,65%)); }
-  67%  { filter: drop-shadow(0 0 10px hsl(240,100%,65%)); }
-  83%  { filter: drop-shadow(0 0 10px hsl(300,100%,65%)); }
-  100% { filter: drop-shadow(0 0 10px hsl(360,100%,65%)); }
+/* Ember — slow breathing fire: cool dim then flare to orange heat */
+@keyframes styleEmber {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px #FF3A00) drop-shadow(0 0 10px rgba(255,80,0,0.4));
+  }
+  40% {
+    filter: drop-shadow(0 0 3px #CC2900) drop-shadow(0 0 6px rgba(200,40,0,0.25));
+  }
+  70% {
+    filter: drop-shadow(0 0 14px #FF6B35) drop-shadow(0 0 28px rgba(255,140,0,0.8)) drop-shadow(0 0 40px rgba(255,80,0,0.4));
+  }
 }
 
-.style-anim-blaze     { animation: styleBlaze     1.5s ease-in-out infinite; }
-.style-anim-lightning { animation: styleLightning 2.5s ease-in-out infinite; }
-.style-anim-pulse     { animation: stylePulse     1.2s ease-in-out infinite; }
-.style-anim-rainbow   { animation: styleRainbow   2.0s linear infinite; }
+/* Hologram — sci-fi teal shimmer: hue-rotate + brightness pulse + ghosting */
+@keyframes styleHologram {
+  0%   { filter: drop-shadow(0 0 5px #00F5D4) drop-shadow(0 0 14px rgba(0,245,212,0.5)) brightness(1); }
+  30%  { filter: drop-shadow(0 0 9px #00CFB4) drop-shadow(0 0 20px rgba(0,200,180,0.6)) brightness(1.15); }
+  50%  { filter: drop-shadow(0 0 5px #40E0FF) drop-shadow(0 0 16px rgba(64,224,255,0.55)) brightness(0.9); }
+  70%  { filter: drop-shadow(0 0 9px #00F5D4) drop-shadow(0 0 22px rgba(0,245,212,0.7)) brightness(1.2); }
+  85%  { filter: drop-shadow(0 0 3px #00CFB4) drop-shadow(0 0 8px rgba(0,200,180,0.3)) brightness(0.85); }
+  100% { filter: drop-shadow(0 0 5px #00F5D4) drop-shadow(0 0 14px rgba(0,245,212,0.5)) brightness(1); }
+}
+
+.style-anim-neon-sign { animation: styleNeonSign 3.5s ease-in-out infinite; }
+.style-anim-plasma    { animation: stylePlasma   2.0s ease-in-out infinite; }
+.style-anim-glitch    { animation: styleGlitch   2.8s steps(1) infinite; }
+.style-anim-ember     { animation: styleEmber    2.2s ease-in-out infinite; }
+.style-anim-hologram  { animation: styleHologram 2.5s ease-in-out infinite; }
 
 @media (min-width: 768px) {
   .style-swatch { width: 68px; height: 68px; }

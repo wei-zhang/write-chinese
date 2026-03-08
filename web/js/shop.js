@@ -7,7 +7,8 @@
 // ── Stroke Styles ──────────────────────────────
 
 const ALL_ANIM_CLASSES = [
-  'style-anim-blaze', 'style-anim-lightning', 'style-anim-pulse', 'style-anim-rainbow',
+  'style-anim-neon-sign', 'style-anim-plasma', 'style-anim-glitch',
+  'style-anim-ember', 'style-anim-hologram',
 ];
 
 const STROKE_STYLES = [
@@ -42,18 +43,21 @@ const STROKE_STYLES = [
     glowFilter: 'drop-shadow(0 0 8px #FFD700) drop-shadow(0 0 18px #FF9500)', price: 280 },
 
   // ── Animated ──────────────────────────────────────────────────────────────
-  { id: 'blaze',     name: 'Blaze',          desc: '🔥 Pulsing fire glow',
-    color: '#FF4500', widthMult: 1.1, glowColor: '#FF6B35',
-    animClass: 'style-anim-blaze',     price: 350 },
-  { id: 'lightning', name: 'Lightning',      desc: '⚡ Electric flash',
-    color: '#00CFFF', widthMult: 1.0, glowColor: '#00CFFF',
-    animClass: 'style-anim-lightning', price: 400 },
-  { id: 'pulse',     name: 'Pulse',          desc: '💚 Neon breathing',
-    color: '#00FF94', widthMult: 1.0, glowColor: '#00FF94',
-    animClass: 'style-anim-pulse',     price: 380 },
-  { id: 'rainbow',   name: 'Rainbow',        desc: '🌈 Color shifting glow',
-    color: '#FF6BFF', widthMult: 1.0, glowColor: '#FF6BFF',
-    animClass: 'style-anim-rainbow',   price: 500 },
+  { id: 'neon-sign', name: 'Neon Sign',      desc: '💡 Buzzing neon tube flicker',
+    color: '#FF2D78', widthMult: 1.0, glowColor: '#FF2D78',
+    animClass: 'style-anim-neon-sign', price: 350 },
+  { id: 'plasma',    name: 'Plasma',         desc: '⚡ Electric color-cycling arc',
+    color: '#BF5FFF', widthMult: 1.0, glowColor: '#BF5FFF',
+    animClass: 'style-anim-plasma',    price: 400 },
+  { id: 'glitch',    name: 'Glitch',         desc: '👾 Cyberpunk RGB split flash',
+    color: '#00FFCC', widthMult: 1.0, glowColor: '#00FFCC',
+    animClass: 'style-anim-glitch',    price: 380 },
+  { id: 'ember',     name: 'Ember',          desc: '🔥 Breathing fire pulse',
+    color: '#FF6B35', widthMult: 1.1, glowColor: '#FF6B35',
+    animClass: 'style-anim-ember',     price: 420 },
+  { id: 'hologram',  name: 'Hologram',       desc: '🌀 Sci-fi holo shimmer',
+    color: '#00F5D4', widthMult: 1.0, glowColor: '#00F5D4',
+    animClass: 'style-anim-hologram',  price: 500 },
 ];
 
 // ── Storage ────────────────────────────────────
@@ -185,16 +189,24 @@ function applyStyleGlow() {
   const container = document.getElementById('hanzi-container');
   if (!container) return;
   const style = getSelectedStyle();
+
+  // Target the transparent svgWrapper (created in initWriter) so drop-shadow
+  // follows stroke shapes. Applying filter to the dark container glows the whole
+  // rectangle; applying to the SVG element directly breaks HanziWriter's clipPath
+  // rendering on iOS Safari.
+  const wrapper = document.getElementById('hanzi-svg-wrapper') || container;
+
   container.classList.remove(...ALL_ANIM_CLASSES);
+  wrapper.classList.remove(...ALL_ANIM_CLASSES);
+  wrapper.style.filter = '';
+  container.style.filter = '';
+
   if (style.animClass) {
-    container.style.filter = '';
-    container.classList.add(style.animClass);
+    wrapper.classList.add(style.animClass);
   } else if (style.glowFilter) {
-    container.style.filter = style.glowFilter;
+    wrapper.style.filter = style.glowFilter;
   } else if (style.glowColor) {
-    container.style.filter = `drop-shadow(0 0 8px ${style.glowColor})`;
-  } else {
-    container.style.filter = '';
+    wrapper.style.filter = `drop-shadow(0 0 8px ${style.glowColor})`;
   }
 }
 

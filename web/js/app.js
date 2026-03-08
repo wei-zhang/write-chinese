@@ -311,7 +311,12 @@ async function initWriter(char) {
   const selectedStyle = getSelectedStyle();
   const baseWidth = Math.max(6, Math.round(size * 0.015));
 
-  state.writer = HanziWriter.create(container, char, {
+  // Transparent wrapper so glow filter follows stroke shapes, not the dark container rect
+  const svgWrapper = document.createElement('div');
+  svgWrapper.id = 'hanzi-svg-wrapper';
+  container.appendChild(svgWrapper);
+
+  state.writer = HanziWriter.create(svgWrapper, char, {
     width:               size,
     height:              size,
     padding:             Math.round(size * 0.08),
