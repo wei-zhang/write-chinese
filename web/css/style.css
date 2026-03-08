@@ -577,6 +577,67 @@ html, body {
   border: 2px solid rgba(255,255,255,0.5) !important;
 }
 
+.btn-retrace {
+  background: linear-gradient(135deg, #6BCB77, #4ECDC4);
+  color: white;
+  box-shadow: 0 4px 16px rgba(107,203,119,0.4);
+}
+
+.btn-memory-mode {
+  background: linear-gradient(135deg, #A29BFE, #6C5CE7);
+  color: white;
+  box-shadow: 0 4px 16px rgba(108,92,231,0.35);
+}
+
+/* ── Surprise Me button (landing screen) ── */
+
+.surprise-btn {
+  flex: 0 0 100% !important;
+  background: linear-gradient(135deg, #FF6BFF, #A29BFE);
+  color: white;
+  border: none;
+  padding: 16px 18px;
+  border-radius: 50px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(162,155,254,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.15s;
+}
+
+.surprise-btn:active { transform: scale(0.96); }
+
+/* ── Unlock banner (success screen) ── */
+
+.unlock-banner {
+  background: rgba(107,203,119,0.12);
+  border: 1px solid rgba(107,203,119,0.35);
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  text-align: left;
+  max-width: 320px;
+  width: 100%;
+}
+
+.unlock-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #6BCB77;
+  margin-bottom: 8px;
+}
+
+.unlock-item {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
 /* =============================================
    PROGRESS SCREEN
    ============================================= */

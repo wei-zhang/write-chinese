@@ -276,7 +276,9 @@ function renderStarMap(completedChars) {
           <div class="c-progress-bar">
             <div class="c-progress-fill" style="width:${pct}%"></div>
           </div>
-          <div class="c-count">${lit}/${total}</div>
+          <div class="c-count">
+            ${pct > 0 ? `<span style="color:var(--c-color,#FFE66D);font-weight:700">${pct}%</span> · ` : ''}${lit}/${total}
+          </div>
         </div>
       </div>`;
   }).join('');

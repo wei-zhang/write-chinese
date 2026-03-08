@@ -150,10 +150,16 @@ function initLanding() {
     setTimeout(warmup, 1200);
   }
 
+  document.getElementById('surprise-btn').addEventListener('click', surpriseCharacter);
   document.getElementById('progress-btn').addEventListener('click', showProgressScreen);
   document.getElementById('starmap-btn').addEventListener('click', showStarMapScreen);
   document.getElementById('shop-btn').addEventListener('click', openShopScreen);
   document.getElementById('style-btn').addEventListener('click', openStylePicker);
+}
+
+function surpriseCharacter() {
+  const char = CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
+  startTracing(char);
 }
 
 function refreshLanding() {
@@ -632,6 +638,32 @@ function showSuccessScreen(charData, traceCount, newRecord, raceTime) {
     }
   }
 
+  // Feature unlock notification on first completion
+  const unlockDiv = document.getElementById('success-unlocks');
+  if (unlockDiv) {
+    if (traceCount === 1) {
+      unlockDiv.innerHTML = `
+        <div class="unlock-banner">
+          <div class="unlock-title">🔓 Features Unlocked!</div>
+          <div class="unlock-item">🏎️ <strong>Race Mode</strong> — trace again to race your ghost time</div>
+          <div class="unlock-item">🧠 <strong>Memory Mode</strong> — trace from memory for a bonus</div>
+        </div>`;
+      unlockDiv.classList.remove('hidden');
+    } else {
+      unlockDiv.classList.add('hidden');
+    }
+  }
+
+  // Show Memory Mode button only if eligible (traceCount >= 1 means it's now eligible)
+  const memoryBtn = document.getElementById('success-memory-btn');
+  if (memoryBtn) {
+    if (traceCount >= 1) {
+      memoryBtn.classList.remove('hidden');
+    } else {
+      memoryBtn.classList.add('hidden');
+    }
+  }
+
   showScreen('success-screen');
   spawnConfetti();
 }
@@ -646,8 +678,19 @@ function initSuccess() {
   };
 
   document.getElementById('success-home-btn').addEventListener('click', goHome);
-  document.getElementById('success-next-btn').addEventListener('click', goHome);
+  document.getElementById('success-next-btn').addEventListener('click', surpriseCharacter);
   document.getElementById('success-starmap-btn').addEventListener('click', showStarMapScreen);
+
+  document.getElementById('success-retrace-btn').addEventListener('click', () => {
+    if (state.currentChar) startTracing(state.currentChar);
+  });
+
+  document.getElementById('success-memory-btn').addEventListener('click', () => {
+    if (!state.currentChar) return;
+    state.memoryMode = true;
+    startTracing(state.currentChar);
+    setTimeout(() => enterMemoryFlash(state.writer, 3), 500);
+  });
 
   document.getElementById('success-origin-btn').addEventListener('click', () => {
     if (state.currentChar && typeof openEtymologySheet === 'function') {

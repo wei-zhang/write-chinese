@@ -114,8 +114,9 @@
       </div>
     </div>
 
-    <!-- Bottom action buttons (2×2 grid) -->
+    <!-- Bottom action buttons -->
     <div class="landing-action-row">
+      <button id="surprise-btn" class="surprise-btn">🎲 Surprise Me!</button>
       <button id="starmap-btn" class="starmap-btn">🌌 Star Map</button>
       <button id="progress-btn" class="progress-btn" style="position:static;box-shadow:none;">
         🌱 My Garden
@@ -227,15 +228,18 @@
         animation: popIn 0.4s 0.3s both;
       "></div>
 
+      <!-- Feature unlock notification (shown on first completion) -->
+      <div id="success-unlocks" class="hidden"></div>
+
       <!-- Race time + new record badge -->
       <div id="success-coins"></div>
 
       <button id="success-origin-btn" class="btn-origin-success hidden">🏺 Origin Story</button>
 
       <div class="success-actions">
-        <button id="success-next-btn" class="success-btn btn-next">
-          🔍 Find Another Character
-        </button>
+        <button id="success-retrace-btn" class="success-btn btn-retrace">↩️ Trace Again</button>
+        <button id="success-memory-btn" class="success-btn btn-memory-mode hidden">🧠 Memory Mode</button>
+        <button id="success-next-btn" class="success-btn btn-next">🎲 Surprise Me!</button>
         <button id="success-starmap-btn" class="success-btn" style="
           background: rgba(255,255,255,0.2);
           color: white;
