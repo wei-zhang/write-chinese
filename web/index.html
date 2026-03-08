@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Write Chinese">
+  <meta name="theme-color" content="#1A1A2E">
+  <title>Write Chinese</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="css/shop.css">
+  <link rel="stylesheet" href="css/etymology.css">
+</head>
+<body>
+
+  <!-- Confetti overlay (global) -->
+  <div id="confetti-container" class="confetti-container"></div>
+
+  <!-- Etymology / Origin sheet (global) -->
+  <div id="etymology-modal">
+    <div class="modal-sheet" id="etymology-sheet">
+      <div class="modal-handle"></div>
+      <div class="etym-header">
+        <span id="etym-type-badge" class="etym-type-badge"></span>
+      </div>
+      <div class="etym-char-row">
+        <div id="etym-char" class="etym-char"></div>
+        <div class="etym-char-info">
+          <div id="etym-pinyin" class="etym-pinyin"></div>
+          <div id="etym-meaning" class="etym-meaning"></div>
+        </div>
+      </div>
+      <!-- Visual strip: only for pictographic -->
+      <div id="etym-visual" class="etym-visual hidden">
+        <div class="etym-vis-step"><div id="etym-emoji" class="etym-vis-item"></div><div class="etym-vis-label">Concept</div></div>
+        <div class="etym-arrow">→</div>
+        <div class="etym-vis-step"><div id="etym-ancient" class="etym-vis-item etym-ancient-glyph"></div><div class="etym-vis-label">Ancient</div></div>
+        <div class="etym-arrow">→</div>
+        <div class="etym-vis-step"><div id="etym-modern" class="etym-vis-item etym-modern-glyph"></div><div class="etym-vis-label">Modern</div></div>
+      </div>
+      <!-- Component pills: for compound / phonosemantic -->
+      <div id="etym-components" class="etym-components hidden"></div>
+      <!-- Story -->
+      <p id="etym-story" class="etym-story"></p>
+      <button class="modal-close-btn" id="etym-close-btn">Close</button>
+    </div>
+  </div>
+
+  <!-- Constellation detail modal -->
+  <div id="constellation-modal">
+    <div class="modal-sheet">
+      <div class="modal-handle"></div>
+      <div id="modal-title"></div>
+      <div id="modal-subtitle"></div>
+      <div id="modal-char-grid"></div>
+      <button class="modal-close-btn" id="modal-close-btn">Close</button>
+    </div>
+  </div>
+
+  <!-- Style Picker panel (global, fixed) -->
+  <div id="style-picker-backdrop"></div>
+  <div id="style-picker">
+    <div class="picker-title">Stroke Style</div>
+    <div id="style-picker-list"></div>
+    <button id="style-picker-shop-link">🏪 Get more styles</button>
+  </div>
+
+  <!-- ================================================
+       SCREEN 1: LANDING
+       ================================================ -->
+  <div id="landing-screen" class="screen active">
+
+    <div class="landing-header">
+      <div class="app-logo">✍️</div>
+      <h1 class="app-title">Write Chinese</h1>
+      <p class="app-subtitle">Learn to write Chinese characters</p>
+    </div>
+
+    <!-- Coin display -->
+    <div class="landing-coin-row">
+      <div class="coin-badge">🪙 <span class="coin-amount">0</span></div>
+    </div>
+
+    <!-- Character of the Day -->
+    <div class="cotd-container">
+      <div id="cotd-widget"><!-- rendered by game.js --></div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-container">
+      <input
+        id="search-input"
+        class="search-input"
+        type="search"
+        placeholder="Search by pinyin or 汉字..."
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        inputmode="text"
+      >
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <div class="landing-scroll-area">
+      <div id="search-results" class="search-results"></div>
+
+      <div id="landing-empty" class="landing-empty">
+        <div class="landing-empty-icon">🖊️</div>
+        <p>Type pinyin (e.g. <strong>ni</strong> or <strong>nǐ</strong>)<br>
+           or a Chinese character (e.g. <strong>你</strong>)</p>
+      </div>
+    </div>
+
+    <!-- Bottom action buttons (2×2 grid) -->
+    <div class="landing-action-row">
+      <button id="starmap-btn" class="starmap-btn">🌌 Star Map</button>
+      <button id="progress-btn" class="progress-btn" style="position:static;box-shadow:none;">
+        🌱 My Garden
+      </button>
+      <button id="shop-btn" class="shop-action-btn">🏪 Shop</button>
+      <button id="style-btn" class="style-action-btn">🎨 Style</button>
+    </div>
+
+  </div>
+
+  <!-- ================================================
+       SCREEN 2: CHARACTER TRACING
+       ================================================ -->
+  <div id="tracing-screen" class="screen">
+
+    <div class="tracing-header">
+      <button id="back-btn" class="back-btn">← Back</button>
+
+      <div class="char-info-header">
+        <div id="tracing-char" class="char-display">我</div>
+        <div id="tracing-pinyin" class="char-pinyin">wǒ</div>
+      </div>
+
+      <div class="score-display">
+        <div id="score-value" class="score-value">0%</div>
+        <div class="score-label">Score</div>
+        <div class="coin-badge coin-badge-dark" style="margin-top:4px;padding:3px 8px;font-size:12px;">🪙 <span class="coin-amount">0</span></div>
+      </div>
+    </div>
+
+    <!-- Stroke dots -->
+    <div id="stroke-progress" class="stroke-progress"></div>
+
+    <!-- Race bar (hidden until previous race record exists) -->
+    <div id="race-bar" class="hidden">
+      <div class="race-header">
+        <span class="race-label">🏎️ RACE</span>
+        <span class="race-best" id="race-best">Best: —</span>
+        <span class="race-timer" id="race-timer">0.0s</span>
+      </div>
+      <div class="race-rows">
+        <div class="race-row">
+          <div class="race-row-label">You</div>
+          <div class="race-track"><div class="race-fill race-fill-you" id="race-fill-you" style="width:0%"></div></div>
+          <div class="race-stroke-count" id="race-you-count">0/0</div>
+        </div>
+        <div class="race-row">
+          <div class="race-row-label">Ghost</div>
+          <div class="race-track"><div class="race-fill race-fill-ghost" id="race-fill-ghost" style="width:0%"></div></div>
+          <div class="race-stroke-count" id="race-ghost-count">0/0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drawing canvas -->
+    <div class="canvas-wrapper">
+      <div id="hanzi-container">
+        <!-- Memory Flash countdown overlay -->
+        <div id="memory-overlay" class="hidden">
+          <div id="memory-count">3</div>
+          <div class="memory-label">Memorize it!</div>
+        </div>
+        <!-- Memory mode badge (shown while in memory mode) -->
+        <div id="memory-mode-badge" class="hidden">🧠 MEMORY MODE</div>
+      </div>
+    </div>
+
+    <!-- Completion banner -->
+    <div id="completion-banner" style="
+      display:none;
+      text-align:center;
+      padding:8px;
+      background:rgba(107,203,119,0.2);
+      color:#6BCB77;
+      font-weight:700;
+      font-size:14px;
+      flex-shrink:0;
+    "></div>
+
+    <!-- Controls -->
+    <div class="tracing-controls">
+      <button id="hint-btn"    class="control-btn btn-hint">💡 Hint</button>
+      <button id="clear-btn"   class="control-btn btn-clear">🔄 Retry</button>
+      <button id="animate-btn" class="control-btn btn-animate">▶ Show</button>
+      <button id="memory-btn"  class="control-btn btn-animate hidden">🧠 Memory</button>
+      <button id="origin-btn"  class="control-btn btn-origin hidden">🏺 Origin</button>
+      <button id="style-btn-trace" class="control-btn btn-style">🎨</button>
+    </div>
+
+  </div>
+
+  <!-- ================================================
+       SCREEN 3: SUCCESS / CELEBRATION
+       ================================================ -->
+  <div id="success-screen" class="screen">
+
+    <div class="success-content">
+      <span class="success-emoji">🎉</span>
+      <div id="success-char" class="success-char">我</div>
+      <h2 class="success-title">Perfect!</h2>
+      <p class="success-message">
+        You wrote <strong id="success-pinyin">wǒ</strong>
+        (<span id="success-meaning">I / me</span>) perfectly!<br>
+        Great job! Keep it up! 🌟
+      </p>
+      <div id="success-plant-msg" style="
+        font-size: 28px;
+        margin-bottom: 12px;
+        animation: popIn 0.4s 0.3s both;
+      "></div>
+
+      <!-- Race time + new record badge -->
+      <div id="success-coins"></div>
+
+      <button id="success-origin-btn" class="btn-origin-success hidden">🏺 Origin Story</button>
+
+      <div class="success-actions">
+        <button id="success-next-btn" class="success-btn btn-next">
+          🔍 Find Another Character
+        </button>
+        <button id="success-starmap-btn" class="success-btn" style="
+          background: rgba(255,255,255,0.2);
+          color: white;
+          border: 2px solid rgba(255,255,255,0.4);
+        ">
+          🌌 View Star Map
+        </button>
+        <button id="success-home-btn" class="success-btn btn-home">
+          🏠 Home
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================================================
+       SCREEN 4: LEARNING PROGRESS
+       ================================================ -->
+  <div id="progress-screen" class="screen">
+
+    <div class="progress-header">
+      <div class="progress-header-top">
+        <button id="home-btn" class="home-btn">🏠 Home</button>
+        <h2 class="progress-title">My Garden</h2>
+        <div class="coin-badge" style="min-width:80px;">🪙 <span class="coin-amount">0</span></div>
+      </div>
+
+      <div class="progress-stats">
+        <div class="stats-numbers">
+          <div id="progress-count" class="stats-count">0 out of 0</div>
+          <div class="stats-label">characters mastered</div>
+        </div>
+        <div class="progress-bar-container" style="flex:2;">
+          <div id="progress-bar-fill" class="progress-bar-fill" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plant legend -->
+    <div class="plant-legend">
+      <div class="plant-legend-item">🌑 Not started</div>
+      <div class="plant-legend-item">🌱 Traced once</div>
+      <div class="plant-legend-item">🌸 3× traced</div>
+      <div class="plant-legend-item">🌳 5× mastered</div>
+    </div>
+
+    <div id="progress-grid" class="characters-grid"></div>
+
+    <div id="progress-empty" class="progress-empty">
+      <div class="progress-empty-icon">🌱</div>
+      <p>Your garden is empty.<br>
+         Trace characters to grow plants!<br>
+         Score 100% to plant your first seed 🌱</p>
+    </div>
+
+  </div>
+
+  <!-- ================================================
+       SCREEN 5: STAR MAP
+       ================================================ -->
+  <div id="starmap-screen" class="screen">
+
+    <div class="starmap-header">
+      <button class="back-btn" id="starmap-back-btn">← Back</button>
+      <div class="starmap-title-group">
+        <div class="starmap-title">🌌 Star Map</div>
+        <div class="starmap-subtitle">Complete constellations to unlock the sky</div>
+      </div>
+      <div class="coin-badge coin-badge-dark" style="min-width:64px;">🪙 <span class="coin-amount">0</span></div>
+    </div>
+
+    <div class="starmap-stats">
+      <div class="starmap-stat-pill" id="starmap-summary">⭐ 0 / 148 stars</div>
+      <div class="starmap-stat-pill" id="starmap-constellations">✨ 0 / 12 constellations</div>
+    </div>
+
+    <div id="starmap-grid"><!-- rendered by game.js --></div>
+
+  </div>
+
+  <!-- ================================================
+       SCREEN 6: SHOP
+       ================================================ -->
+  <div id="shop-screen" class="screen">
+
+    <div class="shop-header">
+      <button id="shop-back-btn" class="back-btn">← Back</button>
+      <div class="shop-title">🏪 Shop</div>
+      <div class="coin-badge coin-badge-dark">🪙 <span class="coin-amount">0</span></div>
+    </div>
+
+    <div id="shop-grid"></div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="lib/hanzi-writer.min.js"></script>
+  <script src="js/char-data-bundle.js"></script>
+  <script src="js/characters.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/shop.js"></script>
+  <script src="js/etymology.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

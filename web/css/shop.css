@@ -1,0 +1,500 @@
+/* =============================================
+   Write Chinese — Shop, Currency & Race Styles
+   ============================================= */
+
+/* ── Coin Badge ──────────────────────────────── */
+
+.coin-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFD700;
+  min-width: 64px;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.coin-badge-dark {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.25);
+  color: #FFD700;
+}
+
+/* Landing screen coin display */
+.landing-coin-row {
+  display: flex;
+  justify-content: center;
+  padding: 0 0 10px;
+  flex-shrink: 0;
+}
+
+/* ── Coin Popup Animation ────────────────────── */
+
+.coin-popup {
+  position: fixed;
+  z-index: 9999;
+  font-size: 17px;
+  font-weight: 800;
+  color: #FFD700;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  pointer-events: none;
+  animation: coinFloat 1.6s ease-out forwards;
+  white-space: nowrap;
+}
+
+@keyframes coinFloat {
+  0%   { opacity: 0; transform: translateY(0) scale(0.8); }
+  20%  { opacity: 1; transform: translateY(-10px) scale(1.1); }
+  80%  { opacity: 1; transform: translateY(-52px) scale(1); }
+  100% { opacity: 0; transform: translateY(-72px) scale(0.9); }
+}
+
+/* ── Race Bar ─────────────────────────────────── */
+
+#race-bar {
+  padding: 4px 16px 2px;
+  background: rgba(255,255,255,0.03);
+  flex-shrink: 0;
+}
+
+.race-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+
+.race-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #FF6B35;
+  letter-spacing: 0.5px;
+}
+
+.race-best {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  flex: 1;
+}
+
+.race-timer {
+  font-size: 14px;
+  font-weight: 800;
+  color: #FFE66D;
+  font-variant-numeric: tabular-nums;
+  min-width: 46px;
+  text-align: right;
+}
+
+.race-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.race-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.race-row-label {
+  width: 38px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.race-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.race-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+
+.race-fill-you   { background: #4ECDC4; }
+.race-fill-ghost { background: rgba(255,255,255,0.28); }
+
+.race-stroke-count {
+  font-size: 10px;
+  color: rgba(255,255,255,0.35);
+  width: 28px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ── Shop Screen ─────────────────────────────── */
+
+#shop-screen {
+  background: #1A1A2E;
+  padding: 0;
+  overflow: hidden;
+}
+
+.shop-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(env(safe-area-inset-top, 12px) + 8px) 16px 12px;
+  background: rgba(255,255,255,0.04);
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.shop-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: white;
+}
+
+#shop-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 14px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.shop-style-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 18px;
+  padding: 14px;
+  border: 1.5px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: border-color 0.2s;
+}
+
+.shop-style-card.owned {
+  border-color: rgba(255,255,255,0.15);
+}
+
+.shop-style-card.selected {
+  border-color: #FFD700;
+  background: rgba(255,215,0,0.08);
+}
+
+.style-swatch {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.style-info {
+  text-align: center;
+  flex: 1;
+}
+
+.style-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+}
+
+.style-desc {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 2px;
+}
+
+.shop-btn {
+  width: 100%;
+  padding: 8px 0;
+  border-radius: 12px;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.shop-btn:active { transform: scale(0.96); }
+
+.shop-btn-selected {
+  background: rgba(255,215,0,0.15);
+  color: #FFD700;
+  border: 1px solid rgba(255,215,0,0.4);
+  cursor: default;
+}
+
+.shop-btn-use {
+  background: rgba(78,205,196,0.2);
+  color: #4ECDC4;
+  border: 1px solid rgba(78,205,196,0.4);
+}
+
+.shop-btn-buy {
+  background: rgba(255,215,0,0.2);
+  color: #FFD700;
+  border: 1px solid rgba(255,215,0,0.4);
+}
+
+.shop-btn-locked {
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  cursor: not-allowed;
+}
+
+/* ── Style Picker Panel ───────────────────────── */
+
+#style-picker-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 300;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+#style-picker-backdrop.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#style-picker {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #16162A;
+  border-radius: 24px 24px 0 0;
+  padding: 16px 20px calc(env(safe-area-inset-bottom, 16px) + 16px);
+  z-index: 301;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+#style-picker.open {
+  transform: translateY(0);
+}
+
+.picker-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#style-picker-list {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.picker-swatch {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s;
+  border: 2.5px solid transparent;
+}
+
+.picker-swatch:active { transform: scale(0.9); }
+
+.picker-swatch.selected {
+  border-color: white;
+  transform: scale(1.12);
+}
+
+.picker-check {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: white;
+  font-weight: 900;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+
+#style-picker-shop-link {
+  width: 100%;
+  text-align: center;
+  display: block;
+  color: rgba(255,255,255,0.35);
+  font-size: 13px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  text-decoration: underline;
+}
+
+/* ── Landing action buttons ───────────────────── */
+
+.landing-action-row {
+  flex-wrap: wrap !important;
+}
+
+.landing-action-row > button {
+  flex: 1 0 calc(50% - 5px);
+}
+
+.shop-action-btn {
+  background: linear-gradient(135deg, #FFD700, #FF9500);
+  color: #1A1A1A;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(255,215,0,0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  transition: transform 0.15s;
+}
+
+.shop-action-btn:active { transform: scale(0.96); }
+
+.style-action-btn {
+  background: linear-gradient(135deg, #A29BFE, #6C5CE7);
+  color: white;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(108,92,231,0.35);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  transition: transform 0.15s;
+}
+
+.style-action-btn:active { transform: scale(0.96); }
+
+/* ── Style button in tracing controls ────────── */
+
+.btn-style {
+  background: rgba(162, 155, 254, 0.15);
+  color: #A29BFE;
+  border: 1.5px solid rgba(162, 155, 254, 0.35);
+}
+
+/* ── Success screen race/record info ────────── */
+
+#success-coins {
+  font-size: 17px;
+  color: rgba(255,255,255,0.9);
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+}
+
+.success-record-badge {
+  background: rgba(255,215,0,0.25);
+  border: 1px solid rgba(255,215,0,0.5);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 14px;
+  color: #FFD700;
+}
+
+/* ── Animated Swatch ──────────────────────────── */
+
+@keyframes swatchPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.91); }
+}
+
+.swatch-animated {
+  animation: swatchPulse 1.2s ease-in-out infinite;
+}
+
+/* ── Style Type Badges ───────────────────────── */
+
+.style-type-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.3px;
+}
+
+.badge-anim {
+  background: rgba(255, 107, 53, 0.2);
+  color: #FF8C5A;
+  border: 1px solid rgba(255, 107, 53, 0.4);
+}
+
+.badge-blend {
+  background: rgba(162, 155, 254, 0.2);
+  color: #B8B2FF;
+  border: 1px solid rgba(162, 155, 254, 0.4);
+}
+
+/* ── Animated Style Container Classes ─────────── */
+
+@keyframes styleBlaze {
+  0%, 100% { filter: drop-shadow(0 0 6px #FF6B35) drop-shadow(0 0 10px rgba(255,50,0,0.5)); }
+  50%       { filter: drop-shadow(0 0 16px #FF6B35) drop-shadow(0 0 26px rgba(255,120,0,0.85)); }
+}
+
+@keyframes styleLightning {
+  0%, 75%, 100% { filter: drop-shadow(0 0 4px #00CFFF) drop-shadow(0 0 8px rgba(0,180,255,0.3)); }
+  80%           { filter: drop-shadow(0 0 22px #FFFFFF) drop-shadow(0 0 30px #00CFFF); }
+  85%           { filter: drop-shadow(0 0 6px #00CFFF) drop-shadow(0 0 10px rgba(0,180,255,0.4)); }
+  90%           { filter: drop-shadow(0 0 18px #FFFFFF) drop-shadow(0 0 24px #00CFFF); }
+}
+
+@keyframes stylePulse {
+  0%, 100% { filter: drop-shadow(0 0 4px #00FF94) drop-shadow(0 0 8px rgba(0,255,148,0.3)); }
+  50%       { filter: drop-shadow(0 0 18px #00FF94) drop-shadow(0 0 30px rgba(0,255,148,0.75)); }
+}
+
+@keyframes styleRainbow {
+  0%   { filter: drop-shadow(0 0 10px hsl(0,100%,65%)); }
+  17%  { filter: drop-shadow(0 0 10px hsl(60,100%,65%)); }
+  33%  { filter: drop-shadow(0 0 10px hsl(120,100%,65%)); }
+  50%  { filter: drop-shadow(0 0 10px hsl(180,100%,65%)); }
+  67%  { filter: drop-shadow(0 0 10px hsl(240,100%,65%)); }
+  83%  { filter: drop-shadow(0 0 10px hsl(300,100%,65%)); }
+  100% { filter: drop-shadow(0 0 10px hsl(360,100%,65%)); }
+}
+
+.style-anim-blaze     { animation: styleBlaze     1.5s ease-in-out infinite; }
+.style-anim-lightning { animation: styleLightning 2.5s ease-in-out infinite; }
+.style-anim-pulse     { animation: stylePulse     1.2s ease-in-out infinite; }
+.style-anim-rainbow   { animation: styleRainbow   2.0s linear infinite; }
+
+@media (min-width: 768px) {
+  .style-swatch { width: 68px; height: 68px; }
+  #shop-grid { gap: 16px; padding: 20px; }
+}

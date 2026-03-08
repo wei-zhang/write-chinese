@@ -1,0 +1,550 @@
+/* =============================================
+   Write Chinese — Game Feature Styles
+   ============================================= */
+
+/* ── Character of the Day Widget ─────────────── */
+
+.cotd-container {
+  padding: 0 0 12px;
+}
+
+#cotd-widget {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.cotd-streak {
+  background: linear-gradient(160deg, #2D3436, #1E1E2E);
+  border-radius: 16px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 70px;
+  flex-shrink: 0;
+}
+
+.streak-fire {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.streak-count {
+  font-size: 24px;
+  font-weight: 900;
+  color: #FFE66D;
+  line-height: 1;
+  margin-top: 4px;
+}
+
+.streak-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 2px;
+  text-align: center;
+}
+
+.cotd-body {
+  flex: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: transform 0.15s, opacity 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cotd-body:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+.cotd-body.cotd-done {
+  background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+  cursor: default;
+}
+
+.cotd-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.cotd-char {
+  font-size: 42px;
+  color: white;
+  line-height: 1;
+  font-weight: 300;
+  flex-shrink: 0;
+}
+
+.cotd-info {
+  flex: 1;
+}
+
+.cotd-body > .cotd-char { flex-shrink: 0; }
+.cotd-body > div:not(.cotd-char) { flex: 1; }
+
+.cotd-pinyin {
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+}
+
+.cotd-meaning {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  margin-top: 2px;
+}
+
+.cotd-status {
+  font-size: 12px;
+  color: rgba(255,255,255,0.9);
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+.cotd-cta {
+  color: #FFE66D;
+}
+
+/* ── Star Map Screen ──────────────────────────── */
+
+#starmap-screen {
+  background: #0A0A1A;
+  padding: 0;
+  overflow: hidden;
+}
+
+.starmap-header {
+  padding: calc(env(safe-area-inset-top, 12px) + 8px) 16px 12px;
+  background: rgba(255,255,255,0.03);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.starmap-title-group {
+  flex: 1;
+  text-align: center;
+}
+
+.starmap-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: white;
+}
+
+.starmap-subtitle {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 1px;
+}
+
+#starmap-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 14px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Constellation Cards */
+.constellation-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  padding: 14px;
+  border: 1.5px solid rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.constellation-card:active {
+  transform: scale(0.97);
+}
+
+.constellation-card.complete {
+  border-color: var(--c-color, #FFE66D);
+  background: rgba(255,255,255,0.08);
+}
+
+.c-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: radial-gradient(circle at 50% 0%, var(--c-color, #FFE66D), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.constellation-card.complete .c-glow {
+  opacity: 0.12;
+}
+
+.c-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.c-emoji {
+  font-size: 24px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.c-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.c-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.c-desc {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 1px;
+}
+
+.c-complete-badge {
+  font-size: 18px;
+  flex-shrink: 0;
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Star field */
+.star-field {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+  min-height: 36px;
+  align-items: center;
+}
+
+.star-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: background 0.4s, box-shadow 0.4s;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.star-dot.lit {
+  background: var(--c-color, #FFE66D);
+  border-color: var(--c-color, #FFE66D);
+  box-shadow: 0 0 8px var(--c-color, #FFE66D);
+}
+
+/* Constellation progress bar */
+.c-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.c-progress-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.c-progress-fill {
+  height: 100%;
+  background: var(--c-color, #FFE66D);
+  border-radius: 2px;
+  transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.c-count {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* Starmap header summary */
+.starmap-stats {
+  display: flex;
+  gap: 12px;
+  padding: 8px 14px;
+  flex-shrink: 0;
+}
+
+.starmap-stat-pill {
+  background: rgba(255,255,255,0.06);
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  flex: 1;
+  text-align: center;
+}
+
+/* ── Constellation Detail Modal ───────────────── */
+
+#constellation-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 200;
+  display: flex;
+  align-items: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+#constellation-modal.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-sheet {
+  width: 100%;
+  background: #16162A;
+  border-radius: 28px 28px 0 0;
+  padding: 8px 20px calc(env(safe-area-inset-bottom, 16px) + 16px);
+  max-height: 80vh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-top: 2px solid var(--c-color, #FFE66D);
+}
+
+#constellation-modal.open .modal-sheet {
+  transform: translateY(0);
+}
+
+.modal-handle {
+  width: 40px;
+  height: 4px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 2px;
+  margin: 8px auto 16px;
+}
+
+#modal-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 2px;
+}
+
+#modal-subtitle {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 16px;
+}
+
+#modal-char-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: 10px;
+}
+
+.modal-char-item {
+  background: rgba(255,255,255,0.05);
+  border-radius: 14px;
+  padding: 12px 6px 8px;
+  text-align: center;
+  cursor: pointer;
+  border: 1.5px solid rgba(255,255,255,0.08);
+  transition: transform 0.15s, border-color 0.2s;
+}
+
+.modal-char-item:active {
+  transform: scale(0.95);
+}
+
+.modal-char-item.done {
+  border-color: var(--c-color, #FFE66D);
+  background: rgba(255,255,255,0.1);
+}
+
+.modal-char {
+  font-size: 34px;
+  color: white;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.modal-plant {
+  font-size: 16px;
+  margin: 4px 0 2px;
+}
+
+.modal-pinyin {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+}
+
+.modal-close-btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.7);
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ── Memory Flash Mode ────────────────────────── */
+
+#memory-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 26, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  border-radius: 24px;
+}
+
+#memory-count {
+  font-size: 120px;
+  font-weight: 900;
+  color: #FFE66D;
+  line-height: 1;
+  animation: countPulse 1s ease infinite;
+}
+
+@keyframes countPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.memory-label {
+  font-size: 18px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 12px;
+}
+
+#memory-mode-badge {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 230, 109, 0.2);
+  border: 1px solid rgba(255, 230, 109, 0.5);
+  color: #FFE66D;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  z-index: 10;
+  letter-spacing: 0.5px;
+}
+
+#memory-btn {
+  background: rgba(163, 113, 247, 0.15);
+  color: #C3B1E1;
+  border: 1.5px solid rgba(163, 113, 247, 0.35);
+}
+
+/* ── Progress Screen — Plant Levels ────────────── */
+
+.char-card-plant {
+  font-size: 20px;
+  margin-bottom: 2px;
+}
+
+.plant-legend {
+  display: flex;
+  gap: 8px;
+  padding: 8px 14px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.plant-legend-item {
+  font-size: 12px;
+  color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── Star Map Landing Button ────────────────── */
+
+.landing-action-row {
+  display: flex;
+  gap: 10px;
+  padding: 12px 0 0;
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+.starmap-btn {
+  background: linear-gradient(135deg, #1A1A2E, #2D2D4E);
+  color: white;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  justify-content: center;
+  transition: transform 0.15s;
+}
+
+.starmap-btn:active {
+  transform: scale(0.96);
+}
+
+/* ── Responsive ───────────────────────────────── */
+
+@media (min-width: 768px) {
+  #starmap-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .cotd-char { font-size: 56px; }
+  .streak-count { font-size: 30px; }
+
+  #modal-char-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  }
+}

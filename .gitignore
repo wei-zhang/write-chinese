@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# iOS web bundle — populated by `make sync`, not committed
+ios/WriteChinese/web/
+
+# Xcode user data
+xcuserdata/
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+
+# Build artifacts
+build/
+DerivedData/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+.swiftpm/

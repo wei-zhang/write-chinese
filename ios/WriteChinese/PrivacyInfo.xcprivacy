@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- This app does not track users across apps or websites -->
+	<key>NSPrivacyTracking</key>
+	<false/>
+
+	<!-- No tracking domains used -->
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+
+	<!-- No personal data is collected -->
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array/>
+
+	<!-- No required-reason APIs are used directly.
+	     User progress is stored in WKWebView localStorage (not NSUserDefaults).
+	     No network requests are made; all data is bundled offline. -->
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array/>
+</dict>
+</plist>
