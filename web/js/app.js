@@ -783,10 +783,21 @@ function showStarMapScreen() {
   renderStarMapSummary(state.completedChars);
   updateAllCoinDisplays();
   showScreen('starmap-screen');
+  sizeStarMapGrid();
+}
+
+function sizeStarMapGrid() {
+  const screen = document.getElementById('starmap-screen');
+  const header = screen.querySelector('.starmap-header');
+  const stats = screen.querySelector('.starmap-stats');
+  const grid = document.getElementById('starmap-grid');
+  const available = screen.clientHeight - header.offsetHeight - stats.offsetHeight;
+  grid.style.height = Math.max(0, available) + 'px';
 }
 
 function initStarMap() {
   document.getElementById('starmap-back-btn').addEventListener('click', () => {
+    document.getElementById('starmap-grid').style.height = '';
     showScreen('landing-screen');
   });
   document.getElementById('modal-close-btn').addEventListener('click', closeModal);
@@ -811,6 +822,11 @@ function init() {
   refreshLanding();     // render COTD widget
   updateAllCoinDisplays();
   showScreen('landing-screen');
+  window.addEventListener('resize', () => {
+    if (document.getElementById('starmap-screen').classList.contains('active')) {
+      sizeStarMapGrid();
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', init);
